@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Console;
+
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+class Kernel extends ConsoleKernel
+{
+    protected $commands = [
+        //
+    ];
+
+    protected function schedule(Schedule $schedule): void
+    {
+        // Envoyer les rappels de trajets tous les jours à 8h
+        $schedule->command('trips:send-reminders')->dailyAt('08:00');
+    }
+
+    protected function commands(): void
+    {
+        $this->load(__DIR__.'/Commands');
+
+        require base_path('routes/console.php');
+    }
+}
+
